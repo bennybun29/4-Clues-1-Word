@@ -26,6 +26,30 @@ word_clue_pairs = [
     ("bicycle", ["Vehicle", "Two Wheels", "Pedals", "Transport"]),
     ("mars", ["Planet", "Red", "Martian", "Space"]),
     ("computer", ["Digital", "Electronic", "Games", "Coding"]),
+    ("happy", ["Joyful", "Cheerful", "Content", "Smiling"]),
+    ("cat", ["Pet", "Furry", "Meow", "Whiskers"]),
+    ("garden", ["Plants", "Flowers", "Outdoors", "Green"]),
+    ("ocean", ["Water", "Blue", "Wave", "Fish"]),
+    ("book", ["Reading", "Pages", "Story", "Library"]),
+    ("sleep", ["Rest", "Night", "Dream", "Bed"]),
+    ("friend", ["Companion", "Pal", "Buddy", "Company"]),
+    ("sun", ["Sky", "Daylight", "Warmth", "Brightness"]),
+    ("cake", ["Dessert", "Sweet", "Celebration", "Yummy"]),
+    ("tree", ["Wood", "Leaves", "Branches", "Nature"]),
+    ("color", ["Hue", "Paint", "Rainbow", "Palette"]),
+    ("music", ["Sound", "Melody", "Rhythm", "Instrument"]),
+    ("flower", ["Blossom", "Petals", "Garden", "Fragrant"]),
+    ("star", ["Sky", "Night", "Twinkle", "Celestial"]),
+    ("rainbow", ["Colors", "Arc", "Sky", "Spectrum"]),
+    ("laugh", ["Joy", "Happiness", "Giggle", "Humor"]),
+    ("mountain", ["Peak", "Climb", "Summit", "Hike"]),
+    ("butterfly", ["Insect", "Wings", "Flutter", "Metamorphosis"]),
+    ("adventure", ["Exciting", "Journey", "Explore", "Quest"]),
+    ("puzzle", ["Game", "Problem", "Challenge", "Solution"]),
+    ("sunset", ["Evening", "Sun", "Horizon", "Dusk"]),
+    ("candle", ["Flame", "Light", "Wax", "Aroma"]),
+    ("oxygen", ["Gas", "Breath", "Air", "Life"]),
+    ("serenade", ["Music", "Romantic", "Singing", "Love"]),
     # Add more word and clue pairs here
 ]
 
@@ -35,9 +59,33 @@ score_tasks = {
     10: "Dance a silly dance",
     20: "Sing a song in a funny voice",
     30: "Tell a joke to a friend",
-    40: "WALANG TASK ITONG SCORE NA ITO",
-    50: "KUMENDENG KA",
-    60: "KALDAG KA NGA PO",
+    40: "Sing your favorite song",
+    50: "Tell your parents you love them",
+    60: "Hug someone special to you",
+    70: "Draw a funny doodle",
+    80: "Share a fun fact with someone",
+    90: "Do 10 jumping jacks",
+    100: "Take a selfie doing a funny pose",
+    110: "Write a short poem",
+    120: "Send a virtual hug to a friend",
+    130: "Do a random act of kindness",
+    140: "Create a funny meme and share it",
+    150: "Tell a short story using three words at a time with a friend",
+    160: "Learn a simple magic trick and perform it",
+    170: "Cook a new recipe and share a picture",
+    180: "Make up a funny song about the last thing you did",
+    190: "Create a fictional superhero with a silly power",
+    200: "Do a 5-minute stand-up comedy routine for someone",
+    210: "Make a list of 10 things that make you laugh",
+    220: "Share a favorite childhood memory with a friend",
+    230: "Do a one-minute interpretive dance",
+    240: "Send a virtual high-five to someone",
+    250: "Write a short comedy skit and perform it",
+    260: "Compose a funny limerick",
+    270: "Do your best impression of a famous person",
+    280: "Send a funny GIF to a friend",
+    290: "Create a funny nickname for yourself and use it for a day",
+    300: "Record a short video of yourself doing a funny talent",
     # Add more score-task pairs as needed
 }
 
@@ -70,12 +118,13 @@ font = pygame.font.Font(None, 36)
 input_font = pygame.font.Font(None, 32)
 
 # Variables
-word_clue_pairs_copy = word_clue_pairs.copy()  # Make a copy of the original word_clue_pairs
+word_clue_pairs_copy = word_clue_pairs.copy()  # Make a copy of the original word_clue_pairs to later remove it once it appears to not repeat the question again
 current_word, current_clues = "", []
 attempts = 3
 current_guess = ""
 score = 0
 
+#Randomize and Display Word and Clue Pairs
 def generate_word():
     global current_word, current_clues, word_clue_pairs_copy
 
@@ -86,6 +135,7 @@ def generate_word():
     current_word, current_clues = word_clue_pair
     word_clue_pairs_copy.remove(word_clue_pair)  # Remove the chosen word_clue_pair from the copy
 
+#Introductory Screen
 def draw_intro_screen():
     screen.fill(WHITE)
 
@@ -93,6 +143,7 @@ def draw_intro_screen():
 
     pygame.display.flip()
 
+#Displays and get the player's details
 def draw_screen():
     screen.fill(WHITE)
 
@@ -119,6 +170,7 @@ def draw_screen():
 
     pygame.display.flip()
 
+#Display a message when they got the correct answer
 def show_message(message, delay=2000):
     screen.fill(WHITE)
     screen.blit(game_bg, game_bg_rect)
@@ -128,6 +180,7 @@ def show_message(message, delay=2000):
     pygame.display.flip()
     pygame.time.delay(delay)
 
+#Display the correct answer if the player didn't got the right answer
 def reveal_answer():
     delay = 10000
     screen.fill(WHITE)
@@ -153,6 +206,7 @@ def reveal_answer():
     pygame.quit()
     sys.exit()
 
+#Displays ending screen
 def end_game():
     delay = 10000
     screen.fill(WHITE)
@@ -185,11 +239,11 @@ draw_intro_screen()
 pygame.display.flip()
 
 # Wait for Enter key press to start the game
-waiting_for_start = True
-while waiting_for_start:
+play = True
+while play:
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
-            waiting_for_start = False
+            play = False
     pygame.time.delay(100)
 
 generate_word()
@@ -215,7 +269,7 @@ while running:
                     if not word_clue_pairs_copy:
                         end_game()  
                         pygame.display.flip()
-                    if score >= 60:
+                    if score >= 300:
                         end_game()
                 else:
                     attempts -= 1

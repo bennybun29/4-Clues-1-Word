@@ -103,15 +103,25 @@ game_bg = pygame.image.load(r"C:\Users\user\Downloads\background.png")
 game_bg = pygame.transform.scale(game_bg, (WIDTH, HEIGHT))
 game_bg_rect = game_bg.get_rect(topleft=(0, 0))
 
-# Finish
+# Finish Background
 finish_bg = pygame.image.load(r"C:\Users\user\Downloads\FINISH.png")
 finish_bg = pygame.transform.scale(finish_bg, (WIDTH, HEIGHT))
 finish_bg_rect = finish_bg.get_rect(topleft=(0, 0))
 
-#Wrong
+#Wrong Background
 wrong = pygame.image.load(r"C:\Users\user\Downloads\wrong.png")
 wrong = pygame.transform.scale(wrong, (WIDTH, HEIGHT))
 wrong_rect = wrong.get_rect(topleft=(0, 0))
+
+#Clues Background
+clues_bg = pygame.image.load(r"C:\Users\user\Downloads\clues_bg.png")
+clues_bg = pygame.transform.scale(clues_bg, (WIDTH, HEIGHT))
+clues_bg_rect = clues_bg.get_rect(topleft=(0, 0))
+
+#Correct Background
+correct_bg = pygame.image.load(r"C:\Users\user\Downloads\correct_bg.png")
+correct_bg = pygame.transform.scale(correct_bg, (WIDTH, HEIGHT))
+correct_bg_rect = correct_bg.get_rect(topleft=(0, 0))
 
 # Fonts
 font = pygame.font.Font(None, 36)
@@ -147,7 +157,7 @@ def draw_intro_screen():
 def draw_screen():
     screen.fill(WHITE)
 
-    screen.blit(game_bg, game_bg_rect)
+    screen.blit(clues_bg, clues_bg_rect)
 
     clue_y = 160
     for clue in current_clues:
@@ -173,7 +183,7 @@ def draw_screen():
 #Display a message when they got the correct answer
 def show_message(message, delay=2000):
     screen.fill(WHITE)
-    screen.blit(game_bg, game_bg_rect)
+    screen.blit(correct_bg, correct_bg_rect)
     text = font.render(message, True, BLACK)
     text_rect = text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
     screen.blit(text, text_rect)
